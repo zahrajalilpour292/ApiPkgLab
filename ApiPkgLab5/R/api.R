@@ -6,6 +6,7 @@
 #' @references http://shiny.rstudio.com
 #' @export
 #' 
+NULL
 library(httr)
 library(jsonlite)
 

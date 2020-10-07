@@ -17,7 +17,7 @@ Imports:
   shiny
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 LazyData: true
 Depends: R (>= 3.5.0)
-
