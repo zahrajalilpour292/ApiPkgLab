@@ -1,3 +1,11 @@
+#' Getting Data From Api And Convert them to DataFrame
+#' @param it is a url
+#' @description this package get data from api , convert it to data frame and analysis variables
+#' @importFrom jsonlite fromJSON
+#' @importFrom httr GET
+#' @references http://shiny.rstudio.com
+#' @export
+#' 
 library(httr)
 library(jsonlite)
 
