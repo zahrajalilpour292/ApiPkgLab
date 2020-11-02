@@ -7,22 +7,21 @@ Author: Zahra Jalilpour,
         Arslan Shirazi
 Maintainer: Zahra<zahja096@student.liu.se>,
             Arslan<syeha193@student.liu.se>
-Description: By getting the data from API about crime, this package visualise the data
+Description: By getting the data from API about crime this package visualise the data.
 License: GPL-2
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr 
 Depends: 
     R (>= 2.10)
-Imports: 
-  ggplot2,
-  httr,
-  jsonlite,
-  shiny
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    ggplot2,
+    httr,
+    jsonlite,
+    shiny
 LazyData: true
 
 

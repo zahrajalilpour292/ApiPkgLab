@@ -1,21 +1,23 @@
-require(httr)
-require(jsonlite)
-
+#'FetchingData
+#'@title CrimeData
+#'@description fecting the json data from the given url
+#'@return Dataframe
+#'@references "https://data.montgomerycountymd.gov/resource"
+#'
 
 crime_api <- function(){
-  
   url <- "https://data.montgomerycountymd.gov/resource/icn6-v9z3.json"
-  rep <- GET(url)
+  rep <- httr::GET(url)
   # Check rep format is json
-  if(http_type(rep) != "application/json"){
+  if(httr::http_type(rep) != "application/json"){
     stop("API did not return json", call. = FALSE)
   }
-  parsed <- fromJSON(content(rep, "text"))
-  if (status_code(rep) != 200) {
+  parsed <- jsonlite::fromJSON(httr::content(rep, "text"))
+  if (httr::status_code(rep) != 200) {
     stop(
       sprintf(
         " API request failed ", 
-        status_code(rep),
+        httr::status_code(rep),
         parsed$message,
         parsed$documentation_url
       ),
@@ -33,4 +35,4 @@ crime_api <- function(){
 
   
 }
-crime_api()
+#crime_api()
