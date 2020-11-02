@@ -6,7 +6,7 @@ crime_api <- function(){
   
   url <- "https://data.montgomerycountymd.gov/resource/icn6-v9z3.json"
   rep <- GET(url)
-  # Chech rep format is jason
+  # Check rep format is json
   if(http_type(rep) != "application/json"){
     stop("API did not return json", call. = FALSE)
   }
