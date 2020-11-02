@@ -25,6 +25,9 @@ crime_api <- function(){
   
   crime_objects <- names(parsed)
   crime_df <- data.frame(parsed$date, parsed$victims,parsed$district, parsed$city,parsed$location, parsed$crimename1, parsed$crimename2, parsed$crimename3)
+  crime_df$parsed.date = as.POSIXct(crime_df$parsed.date,
+                                    origin='1970-01-01',
+                                    tz="GMT")
   colnames(crime_df)<- c("Date", "no_victims", "District", "City", "Location", "Crime_type1", "Crime_type2", "Crime_type3") 
   return(summary(crime_df))
 
