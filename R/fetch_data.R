@@ -27,6 +27,7 @@ get_key_names <- function(){
 #'AddingLimit
 #'@title UrlFilter
 #'@description Adds the filters in the url
+#'@param new_limit The number of rows api will return
 #'@return return the character
 #'
 extend_base_url <- function(new_limit){
@@ -38,6 +39,8 @@ extend_base_url <- function(new_limit){
 #'@title FecthApiData
 #'@description fecting the json data from the given url
 #'@param limit It tells the number of observation to get from api
+#'@param url The url of our api from where we fetch data
+#'@param offset The number of json pages to load from the api
 #'@return It return a dataframe having the data from api and cleaned
 #'@references "https://data.montgomerycountymd.gov/resource"
 #'@export
