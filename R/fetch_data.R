@@ -1,12 +1,44 @@
-#'FetchingData
-#'@title CrimeData
-#'@description fecting the json data from the given url
-#'@return Dataframe
-#'@references "https://data.montgomerycountymd.gov/resource"
+#'ApiUrl
+#'@title GetUrl
+#'@description This function return the base url of api.
+#'@return It return a valid charater string
 #'
+get_url <- function(){
+  return("https://data.montgomerycountymd.gov/resource/icn6-v9z3.json")
+}
 
-crime_api <- function(){
-  url <- "https://data.montgomerycountymd.gov/resource/icn6-v9z3.json"
+#'KeysName
+#'@title KeysName
+#'@description This function return the name of the keys to extrat from Json file
+#'@return It returen a character vaector
+#'
+get_key_names <- function(){
+  json_keys <- c("Date", 
+                 "no_victims",
+                 "District",
+                 "City",
+                 "Location",
+                 "Crime_type1",
+                 "Crime_type2",
+                 "Crime_type3")
+  return(json_keys)
+}
+
+#'FetchingData
+#'@title FecthApiData
+#'@description fecting the json data from the given url
+#'@param limit It tells the number of observation to get from api
+#'@return It return a dataframe having the data from api and cleaned
+#'@references "https://data.montgomerycountymd.gov/resource"
+#'@export
+
+fetch_api_data <- function(url = get_url(), limit = 500, offset = 0){
+  
+  stopifnot(is.numeric(limit),
+            length(limit) == 1,
+            limit > 100)
+  
+  
   rep <- httr::GET(url)
   # Check rep format is json
   if(httr::http_type(rep) != "application/json"){
@@ -30,9 +62,6 @@ crime_api <- function(){
   crime_df$parsed.date = as.POSIXct(crime_df$parsed.date,
                                     origin='1970-01-01',
                                     tz="GMT")
-  colnames(crime_df)<- c("Date", "no_victims", "District", "City", "Location", "Crime_type1", "Crime_type2", "Crime_type3") 
-  return(summary(crime_df))
-
-  
+  colnames(crime_df)<- get_key_names()
+  return(crime_df)
 }
-#crime_api()
