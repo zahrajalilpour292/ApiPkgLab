@@ -24,6 +24,16 @@ get_key_names <- function(){
   return(json_keys)
 }
 
+#'AddingLimit
+#'@title UrlFilter
+#'@description Adds the filters in the url
+#'@return return the character
+#'
+extend_base_url <- function(new_limit){
+  new_url <- paste0(get_url(),"?","$limit=",new_limit)
+  return(new_url)
+}
+
 #'FetchingData
 #'@title FecthApiData
 #'@description fecting the json data from the given url
@@ -32,12 +42,22 @@ get_key_names <- function(){
 #'@references "https://data.montgomerycountymd.gov/resource"
 #'@export
 
-fetch_api_data <- function(url = get_url(), limit = 500, offset = 0){
-  
+fetch_api_data <- function(url = get_url(), limit = 200, offset = 0){
+  # checks for the inputs of the function 
   stopifnot(is.numeric(limit),
             length(limit) == 1,
             limit > 100)
+  stopifnot(is.character(url),
+            length(url) == 1,
+            url != "",
+            url == get_url())
   
+  stopifnot(is.numeric(offset),
+            offset >= 0,
+            length(offset) == 1)
+  
+  url <- extend_base_url(new_limit =limit )
+  #print(url)
   
   rep <- httr::GET(url)
   # Check rep format is json
