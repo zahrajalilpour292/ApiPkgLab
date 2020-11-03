@@ -4,13 +4,13 @@
 #
 # Find out more about building applications with Shiny here:
 #
-#    http://shiny.rstudio.com/
-#
-#runGitHub("shiny_example", "rstudio")
-    library(jsonlite)
-#library(shiny)
-#source("R/fecth_data.R")
+setwd('../..')
+#print(getwd())
+source("R/fetch_data.R",encoding = getOption("encoding"))
+data <- fetch_api_data()
 
+
+library(shiny)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -28,14 +28,20 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
-           textOutput("selected_var")
+           textOutput("selected_var"),
+           plotOutput("barplot1")
         )
     )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
+    colums <- colnames(data)
+    
+    output$barplot1 <- renderPlot(
+        barplot(table(data[4]))
+    )
+    
     output$selected_var <- renderText({
        paste( "You have selected ", input$var)
     })
