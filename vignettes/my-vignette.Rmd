@@ -17,3 +17,11 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ApiPkgLab5)
 ```
+# About the package
+This package access directly to reported County crime  from API https://data.montgomerycountymd.gov/resource/icn6-v9z3.json. Some features are selected to visualize output related to crime, like different type of crime, number of victims, district, city and so on.
+This package consists of two R scripts: 1- fetch_data.R which get data and store them in a data frame. 2- app.R that related to shiny app which visualize data from fetch_data
+
+# Shiny
+If you want to find the graph via shiny, you can use:
+
+`<shiny::runGitHub("repo = "codercola-mw/lab5/""ApiPkgLab","zahrajalilpour292", subdir = "inst/shiny-examples/crime-shiny/", ref="main")>
