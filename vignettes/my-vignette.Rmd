@@ -24,4 +24,4 @@ This package consists of two R scripts: 1- fetch_data.R which get data and store
 # Shiny
 If you want to find the graph via shiny, you can use:
 
-`<shiny::runGitHub("repo = "codercola-mw/lab5/""ApiPkgLab","zahrajalilpour292", subdir = "inst/shiny-examples/crime-shiny/", ref="main")>
+`<shiny::runGitHub("ApiPkgLab","zahrajalilpour292", subdir = "inst/shiny-examples/crime-shiny/", ref="main")>
