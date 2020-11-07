@@ -20,7 +20,9 @@ get_key_names <- function(){
                  "Location",
                  "Crime_type1",
                  "Crime_type2",
-                 "Crime_type3")
+                 "Crime_type3",
+                 "latitude",
+                 "longitude")
   return(json_keys)
 }
 
@@ -43,7 +45,6 @@ extend_base_url <- function(new_limit){
 #'@param offset The number of json pages to load from the api
 #'@return It return a dataframe having the data from api and cleaned
 #'@references "https://data.montgomerycountymd.gov/resource"
-#'@export
 
 fetch_api_data <- function(url = get_url(), limit = 200, offset = 0){
   # checks for the inputs of the function 
@@ -81,7 +82,9 @@ fetch_api_data <- function(url = get_url(), limit = 200, offset = 0){
   }
   
   crime_objects <- names(parsed)
-  crime_df <- data.frame(parsed$date, parsed$victims,parsed$district, parsed$city,parsed$location, parsed$crimename1, parsed$crimename2, parsed$crimename3)
+  crime_df <- data.frame(parsed$date, parsed$victims,parsed$district, parsed$city,
+                         parsed$location, parsed$crimename1, parsed$crimename2,
+                         parsed$crimename3,parsed$latitude,parsed$longitude)
   crime_df$parsed.date = as.POSIXct(crime_df$parsed.date,
                                     origin='1970-01-01',
                                     tz="GMT")
