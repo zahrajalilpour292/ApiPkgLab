@@ -8,6 +8,8 @@ get_city_crimes_loc(city_name, cities_df)
 }
 \arguments{
 \item{city_name}{The city for which crime locations to filter}
+
+\item{cities_df}{The crimes dataframe with 10 columns}
 }
 \value{
 Returns the matrix with latitude and longitude

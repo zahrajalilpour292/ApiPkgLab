@@ -26,16 +26,20 @@ Some features are selected to visualize output related to crime, like different 
 
 This packages has two functions that are avaible for the users to get the dataframe of the crimes data.
 
+The second function return the coordinates for the speicific given city.
+
 ```{r}
 # it take a limit parameter that can used also used for the big query like 200 obersvation.
-head(get_crime_dataframe(300))
-```
+df <- get_crime_dataframe(300)
+head(df)
 
-The second function return the coordinates for the speicific given city.
+head(get_city_crimes_loc("All Cities",df))
+
+```
 
 Also return the coordinates of all cities if empty string is specified.
 ```{r}
-head(get_city_crimes_loc("All Cities"))
+
 ```
 
 # Functions only for developers of package

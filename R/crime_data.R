@@ -18,6 +18,7 @@ get_crime_dataframe <- function(limit){
 #'CityCordinates
 #'@description The function returns the locations of crime in specific city
 #'@param city_name The city for which crime locations to filter
+#'@param cities_df The crimes dataframe with 10 columns
 #'@title CityCrimeLocations
 #'@return Returns the matrix with latitude and longitude
 #'@export
@@ -33,9 +34,9 @@ get_city_crimes_loc <- function(city_name, cities_df){
   #df <- get_crime_dataframe(200)
   new_df <- NA
   if(city_name == "" | city_name == "All Cities"){
-    new_df <- df
+    new_df <- cities_df
   }else{
-    new_df <- df[df$City == city_name]
+    new_df <- cities_df[cities_df$City == city_name]
   }
   longitude <- unlist(lapply(as.vector(cities_df[,9]),as.double))
   latitude <- unlist(lapply(as.vector(cities_df[,10]),as.double))
