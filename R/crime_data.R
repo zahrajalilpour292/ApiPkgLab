@@ -6,6 +6,11 @@
 #'@export
 #'
 get_crime_dataframe <- function(limit){
+  
+  stopifnot(is.numeric(limit),
+            length(limit) == 1,
+            limit >= 200)
+  
   df <- fetch_api_data(limit = limit)
   return(df)
 }
@@ -17,20 +22,23 @@ get_crime_dataframe <- function(limit){
 #'@return Returns the matrix with latitude and longitude
 #'@export
 #'
-get_city_crimes_loc <- function(city_name){
+get_city_crimes_loc <- function(city_name, cities_df){
   
+  stopifnot(is.character(city_name),
+            length(city_name) == 1)
   
+  stopifnot(is.data.frame(cities_df),
+            ncol(cities_df) == 10)
   
-  
-  df <- get_crime_dataframe(200)
+  #df <- get_crime_dataframe(200)
   new_df <- NA
   if(city_name == "" | city_name == "All Cities"){
     new_df <- df
   }else{
     new_df <- df[df$City == city_name]
   }
-  #options(digits = )
-  loc_df <- data.frame(long = unlist(lapply(as.vector(df[,9]),as.double))
-                       ,lat =unlist(lapply(as.vector(df[,10]),as.double)))
+  longitude <- unlist(lapply(as.vector(cities_df[,9]),as.double))
+  latitude <- unlist(lapply(as.vector(cities_df[,10]),as.double))
+  loc_df <- data.frame(longitude = longitude,latitude =latitude)
   return(as.matrix(loc_df))
 }

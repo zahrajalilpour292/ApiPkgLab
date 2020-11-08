@@ -1,5 +1,5 @@
 ---
-title: "my-vignette"
+title: "Lab 5"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{my-vignette}
@@ -18,10 +18,51 @@ knitr::opts_chunk$set(
 library(ApiPkgLab5)
 ```
 # About the package
-This package access directly to reported County crime  from API https://data.montgomerycountymd.gov/resource/icn6-v9z3.json. Some features are selected to visualize output related to crime, like different type of crime, number of victims, district, city and so on.
-This package consists of two R scripts: 1- fetch_data.R which get data and store them in a data frame. 2- app.R that related to shiny app which visualize data from fetch_data
+This package access directly to reported County crime  from API https://data.montgomerycountymd.gov/resource/icn6-v9z3.json. 
+
+Some features are selected to visualize output related to crime, like different type of crime, number of victims, district, city and so on.
+
+# Description
+
+This packages has two functions that are avaible for the users to get the dataframe of the crimes data.
+
+```{r}
+# it take a limit parameter that can used also used for the big query like 200 obersvation.
+head(get_crime_dataframe(300))
+```
+
+The second function return the coordinates for the speicific given city.
+
+Also return the coordinates of all cities if empty string is specified.
+```{r}
+head(get_city_crimes_loc("All Cities"))
+```
+
+# Functions only for developers of package
+
+There are methdos that are only developer used to fetch the data, valid the url , json keys methos. These methods reprent the backend logic of handling the server data.
+
+```{r}
+# get_url()
+# get_key_names()
+# extend_base_url()
+# fetch_api_data()
+```
 
 # Shiny
-If you want to find the graph via shiny, you can use:
+This package also includes the shiny application to see the interactive visulization.
 
-`<shiny::runGitHub("ApiPkgLab","zahrajalilpour292", subdir = "inst/shiny-examples/crime-shiny/", ref="main")>
+Shiny app uses the methods of the ApiPkgLab5 library for the retrival of data and also for filteratin coordinates of the different cities.
+`
+shiny::runGitHub("ApiPkgLab","zahrajalilpour292",subdir="inst/shiny-examples/", ref="main")
+`
+
+# Shiny Repo
+
+There is also another repository created for the shiny, In which explicitly we download the ApiPkgLab5 library and load it and use the data for the visulization.
+
+### Link https://github.com/arslan74/shinyvisulization
+
+`
+shiny::runGitHub("shinyvisulization ","arslan74", ref="main")
+`
