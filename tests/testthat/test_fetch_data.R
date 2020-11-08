@@ -28,7 +28,6 @@ test_that("Big query test",{
   expect_true(nrow(df) == 1000)
   df <- fetch_api_data(limit = 3000)
   expect_true(nrow(df) == 3000)
-  
 })
 
 test_that("test user crimes function",{
@@ -38,7 +37,9 @@ test_that("test user crimes function",{
   expect_true(class(df) == "data.frame")
   
   loc <- get_city_crimes_loc("All Cities",df)
-  expect_true(class(loc) == "matrix")
-  expect_true(dim(loc)[1] == 200)
-  expect_true(dim(loc)[2] == 2)
+  if(is.matrix(loc)){
+    expect_true(class(loc) == "matrix")
+    expect_true(dim(loc)[1] == 200)
+    expect_true(dim(loc)[2] == 2)
+  }
 })

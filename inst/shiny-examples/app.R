@@ -60,7 +60,7 @@ server <- function(input, output, session) {
         
         
         datasetInput <- eventReactive({
-            get_city_crimes_loc(as.character(input$selectcity))
+            get_city_crimes_loc(as.character(input$selectcity),)
         })
         
         leaflet() %>%

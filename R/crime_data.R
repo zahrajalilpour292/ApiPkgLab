@@ -41,5 +41,5 @@ get_city_crimes_loc <- function(city_name, cities_df){
   longitude <- unlist(lapply(as.vector(cities_df[,9]),as.double))
   latitude <- unlist(lapply(as.vector(cities_df[,10]),as.double))
   loc_df <- data.frame(longitude = longitude,latitude =latitude)
-  return(as.matrix(loc_df))
+    return(as.matrix(loc_df))
 }
