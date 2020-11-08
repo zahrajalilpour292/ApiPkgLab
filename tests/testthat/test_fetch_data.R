@@ -32,7 +32,7 @@ test_that("Big query test",{
 
 test_that("test user crimes function",{
   df <- get_crime_dataframe(limit = 200)
-  expect_true(nrow(df) == 200)
+  expect_true(nrow(df) >= 200)
   expect_true(length(df) == 10)
   expect_true(class(df) == "data.frame")
   
