@@ -25,7 +25,7 @@ ui <- fluidPage(
                       value = "Crimes Mayland City Map"),
             selectInput("selectcity",
                         h4("City"),
-                        choices = list(),
+                        choices = list()
                         )
         ),
         mainPanel(
@@ -58,16 +58,33 @@ server <- function(input, output, session) {
     # add pins to map
     output$map <- renderLeaflet({
         
-        
-        datasetInput <- eventReactive({
-            get_city_crimes_loc(as.character(input$selectcity),)
+        observeEvent(input$selectcity, {
+            input_name <- as.character(input$selectcity)
+            #browser()
+            lat <- get_city_crimes_loc(as.character(input_name),df_comp_crime)[,1]
+            long <- get_city_crimes_loc(as.character(input_name),df_comp_crime)[,2]
+            
+            leafletProxy("map") %>%
+                addCircleMarkers(lng = long,
+                                 lat = lat,
+                                 
+                )
+            
         })
+        
+        # get_lat <- eventReactive({
+        #     get_city_crimes_loc(as.character(input$selectcity),df_comp_crime)[,1]
+        # })
+        # get_long <- eventReactive({
+        #     get_city_crimes_loc(as.character(input$selectcity),df_comp_crime)[,2]
+        # })
+        
         
         leaflet() %>%
             addProviderTiles(providers$Stamen.TonerLite,
                              options = providerTileOptions(noWrap = TRUE)
             ) %>%
-            addMarkers(data = datasetInput())
+            addMarkers(lat =39.0458 ,lng = -76.6413)
     })
 }
 
