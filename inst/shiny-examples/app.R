@@ -9,6 +9,22 @@
 #source("R/crime_data.R",encoding = getOption("encoding"))
 #source("R/crime_data.R",encoding = getOption("encoding"))
 # loading libaries
+# require(devtools)
+# install_github("zahrajalilpour292/ApiPkgLab",force = TRUE)
+# require(shiny)
+# require(leaflet.minicharts)
+# require(leaflet)
+# require(leaflet.extras)
+# require(stringr)
+
+listOfPackages <- c("devtools","shiny","leaflet.minicharts","leaflet","leaflet.extras","stringr")
+for (i in listOfPackages){
+    if(!i %in% installed.packages()){
+        install.packages(i, dependencies = TRUE)
+    }
+}
+
+#loading libaries
 require(devtools)
 install_github("zahrajalilpour292/ApiPkgLab",force = TRUE)
 require(shiny)
