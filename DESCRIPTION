@@ -22,7 +22,6 @@ Suggests:
     httr,
     jsonlite,
     shiny,
-    ApiPkgLab5,
     leaflet,
     stringr,
     leaflet.minicharts
