@@ -67,7 +67,7 @@ server <- function(input, output, session) {
             lati <- ApiPkgLab5::get_city_crimes_loc(input_name,df_comp_crime)[,1]
             long <- ApiPkgLab5::get_city_crimes_loc(input_name,df_comp_crime)[,2]
             
-            leafletProxy("map",data = matrix(long,lati)) %>%
+            leafletProxy("map") %>%
                 clearMarkers()%>%
                 addPulseMarkers(lng = long,
                                  lat = lati,
