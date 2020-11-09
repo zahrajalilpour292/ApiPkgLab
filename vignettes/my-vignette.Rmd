@@ -68,5 +68,5 @@ There is also another repository created for the shiny, In which explicitly we d
 ### Link https://github.com/arslan74/shinyvisulization
 
 `
-shiny::runGitHub("shinyvisulization ","arslan74", ref="main")
+shiny::runGitHub("shinyvisulization","arslan74", ref="main")
 `
