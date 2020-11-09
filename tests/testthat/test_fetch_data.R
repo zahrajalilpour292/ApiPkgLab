@@ -35,11 +35,4 @@ test_that("test user crimes function",{
   expect_true(nrow(df) >= 200)
   expect_true(length(df) == 10)
   expect_true(class(df) == "data.frame")
-  
-  loc <- get_city_crimes_loc("All Cities",df)
-  if(is.matrix(loc)){
-    expect_equal(class(loc), "matrix")
-    expect_true(dim(loc)[1] == 200)
-    expect_true(dim(loc)[2] == 2)
-  }
 })

@@ -21,7 +21,11 @@ Suggests:
     ggplot2,
     httr,
     jsonlite,
-    shiny
+    shiny,
+    ApiPkgLab5,
+    leaflet,
+    stringr,
+    leaflet.minicharts
 LazyData: true
 
 

@@ -6,15 +6,17 @@
 #
 #setwd('../..')
 #print(getwd())
-#source("R/fetch_data.R",encoding = getOption("encoding"))
+#source("R/crime_data.R",encoding = getOption("encoding"))
+#source("R/crime_data.R",encoding = getOption("encoding"))
 # loading libaries
-library(ApiPkgLab5)
-library(shiny)
-library(leaflet.minicharts)
-library(leaflet)
-library(stringr)
+require(devtools)
+install_github("zahrajalilpour292/ApiPkgLab",force = TRUE)
+require(shiny)
+require(leaflet.minicharts)
+require(leaflet)
+require(stringr)
 
-df_crime <- get_crime_dataframe(200)
+df_crime <- ApiPkgLab5::get_crime_dataframe(200)
 
 ui <- fluidPage(
     titlePanel("Crime Analytics", "Interactive Shiny Application"),
@@ -61,8 +63,8 @@ server <- function(input, output, session) {
         observeEvent(input$selectcity, {
             input_name <- as.character(input$selectcity)
             #browser()
-            lat <- get_city_crimes_loc(as.character(input_name),df_comp_crime)[,1]
-            long <- get_city_crimes_loc(as.character(input_name),df_comp_crime)[,2]
+            lat <- ApiPkgLab5::get_city_crimes_loc(as.character(input_name),df_comp_crime)[,1]
+            long <- ApiPkgLab5::get_city_crimes_loc(as.character(input_name),df_comp_crime)[,2]
             
             leafletProxy("map") %>%
                 addCircleMarkers(lng = long,
