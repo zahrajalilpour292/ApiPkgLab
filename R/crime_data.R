@@ -32,14 +32,15 @@ get_city_crimes_loc <- function(city_name, cities_df){
             ncol(cities_df) == 10)
   
   #df <- get_crime_dataframe(200)
+  #browser()
   new_df <- NA
   if(city_name == "" | city_name == "All Cities"){
     new_df <- cities_df
   }else{
     new_df <- cities_df[cities_df["City"] == city_name,]
   }
-  longitude <- unlist(lapply(as.vector(cities_df[,9]),as.double))
-  latitude <- unlist(lapply(as.vector(cities_df[,10]),as.double))
+  longitude <- unlist(lapply(as.vector(new_df[,9]),as.double))
+  latitude <- unlist(lapply(as.vector(new_df[,10]),as.double))
   loc_df <- data.frame(longitude = longitude,latitude =latitude)
     return(as.matrix(loc_df))
 }

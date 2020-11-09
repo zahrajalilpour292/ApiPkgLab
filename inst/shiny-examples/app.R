@@ -14,6 +14,7 @@ install_github("zahrajalilpour292/ApiPkgLab",force = TRUE)
 require(shiny)
 require(leaflet.minicharts)
 require(leaflet)
+require(leaflet.extras)
 require(stringr)
 
 df_crime <- ApiPkgLab5::get_crime_dataframe(200)
@@ -63,14 +64,15 @@ server <- function(input, output, session) {
         observeEvent(input$selectcity, {
             input_name <- as.character(input$selectcity)
             #browser()
-            lat <- ApiPkgLab5::get_city_crimes_loc(as.character(input_name),df_comp_crime)[,1]
-            long <- ApiPkgLab5::get_city_crimes_loc(as.character(input_name),df_comp_crime)[,2]
+            lati <- ApiPkgLab5::get_city_crimes_loc(input_name,df_comp_crime)[,1]
+            long <- ApiPkgLab5::get_city_crimes_loc(input_name,df_comp_crime)[,2]
             
-            leafletProxy("map") %>%
-                addCircleMarkers(lng = long,
-                                 lat = lat,
-                                 
-                )
+            leafletProxy("map",data = matrix(long,lati)) %>%
+                clearMarkers()%>%
+                addPulseMarkers(lng = long,
+                                 lat = lati,
+                                 )%>%
+                setView(lat =mean(lati) ,lng = mean(long),zoom = 10)
             
         })
         
@@ -86,7 +88,7 @@ server <- function(input, output, session) {
             addProviderTiles(providers$Stamen.TonerLite,
                              options = providerTileOptions(noWrap = TRUE)
             ) %>%
-            addMarkers(lat =39.0458 ,lng = -76.6413)
+            setView(lat =39.0458 ,lng = -76.6413,zoom = 10)
     })
 }
 
